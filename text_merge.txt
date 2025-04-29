@@ -1,0 +1,3 @@
+i am text in file one 
+i am text in file two
+i am text in file three.
