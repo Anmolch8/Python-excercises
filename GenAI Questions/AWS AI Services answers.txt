@@ -1,0 +1,124 @@
+1.What is bedrock and amazon Q and the difference between them.
+Amazon SageMaker
+Its a fully managed machine learning lifecycle. Developers can build, train and deploy models in production ready host environment. it also contains sagemaker jumpstart and ML hub with foundation models, built-in algorithms
+
+SageMaker JumpStart can be used for:
+RAG (Retrival Augmented Generation) 
+Model customization
+
+We can reuse, augument, adapt, build new ,models.
+
+Amazon Bedrock:
+It is specifically designed to access the foundation models through a unified API.
+we can use our own data sources for data augmentation or customization. it also offers capabilities to address security, privacy  and responsible AI in the application
+
+we can reuse and adapt.
+
+Amazon Q:
+two types of Amazon Q;
+Amazon Q Developer
+use for generating code and answering question about how to build AWS services
+
+
+Amazon Q Bussiness
+It can build interactive chat application using our own enterprise data
+
+we can resuse and adapt , no customization of the model
+
+No customer data is used to train amazon or third party foundation model.
+
+
+2.When i should use sagemaker vs bedrock vs amazon Q.
+
+Amazon Sagemaker
+its a fully managed service designed to build train and deploy ML models at scale in cluding foundation models.
+helps you throughout ML lifecycle including training infrastructure, Governance, operations
+Two features:
+Amazon sagemaker jumpstart- is ML hub give access to publically available foundation models, we can apply prompt engineering, RAG and model customization
+
+Amazon sagemaker clarify- supports the building of model evaluation jobs to help you evaluate and compare model quality and responsibility metrics for text based foundation models
+
+pricing is pay as you go
+
+we have a full control to customize models and your taining and deployment pipeline.
+Its a good choice for specialized needs that require customized models , select this service when you need fine-grained control over model architecture, training process and deployement
+eg : a healthcare company need to predict patient outcomes based on the biomarkers
+
+
+Amazon Bedrock;
+its a fully managed service for building generative AI applications with popular foundatrion models.we can acess variety of foundation models through unified API.
+
+there is playground to use the models.
+developers without machine learning experience can use amazon bedrock
+
+Features of bedrock:
+Amazon bedrock knowledge bases - helps to implement retrieval augmented generation without custom integrations for your internal data sources
+model customization - provides a method for privately customizing an available foundation model by using your own dataset for training 
+Amazon bedrock guardrails - helps to practice responsible AI . its a set of configuration policies. for filtering undesiable and harmful content
+model evaluation- available for text-based helps to select the best foundation model for the use case
+
+pricing is pay as you go - based on the tokens in the input prompt and in the response, for image based models you pay for each image generated
+for some FM we can opt for provisioned throughput. with this mode you pay an hourly rate based on the maximum number of input or output tokens processed each minute
+
+separate pricinmg applies for cuatomizing and evaluating models
+
+its a good choice when you want to incorporate AI capabilities into an application without investing significantly in machine learning expertise or resouces
+
+eg; a customer support organization that want to enhance its customer chat function with AI might use amazon bedrock.
+
+Amazon Q:
+Its a set of gen-AI based appluications powered by amazon bedrock, each application is aimed at different use case, it also chooses the foundartion models appropriate for the task.
+it gives the nontechnical roles access to generative AI capabilities
+Two primary applications:
+Amazon Q business- can build an internal chat application environment that uses the combination of your enterprise data and LLM Knowldge.. use in departmental help desks (answering IT or HR Questions)
+pricing is subscription based Lite subscription, pro subscription
+Amazon Q developer- is a coding assistant in many IDE. subscription based free tier or pro tier
+
+some integrated in AWS services:
+Amazon Q quicksight
+Amazon Q connect
+
+3.How bedrock works.
+
+4.What are different LLMs models available in bedrock.
+https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
+AI21 Labs
+Amazon Nova 
+Amazon Titan
+Anthropic claude3(input:text,image), (output:text,chat),(streaming:yes)
+Anthropic Claude 3 Opus (input:text,image), (output:text,chat),(streaming:yes)
+Anthropic Claude 3 Sonnet (input:text,image), (output:text,chat),(streaming:yes)
+Cohere
+DeepSeek
+Meta Llamma
+Mistral AI
+Stability AI Stable Diffusion (input:text,image),(output:image)
+Writer
+There is amazon bedrock marketplace also.
+
+5.when to select which model in bedrock.
+| **Use Case**                         | **Recommended Model**                                                  |
+|--------------------------------------|-------------------------------------------------------------------------|
+| **Fast, lightweight responses**      | Claude 3 Haiku, Titan Text Lite, Jurassic-2 Light                      |
+| **Complex reasoning, long context**  | Claude 3 Opus, Titan Text Express, Cohere Command R+                   |
+| **Balanced performance/cost**        | Claude 3 Sonnet, Jurassic-2 Mid                                        |
+| **Multilingual generation**          | Llama 2, Cohere, Titan                                                  |
+| **RAG (Retrieval-Augmented Generation)** | Cohere Command R+, Claude 3 Opus/Sonnet with embeddings               |
+| **Text embedding / vector search**   | Titan Embeddings, Cohere Embed                                          |
+| **Text-to-image generation**         | Stability AI (Stable Diffusion), Titan Image Generator (if available)  |
+| **Custom fine-tuning needs**         | Titan models (Amazon offers better fine-tuning support)                |
+| **Open source / self-hosting potential** | Meta Llama 2                                                           |
+
+
+
+
+
+
+
+
+
+
+
+
+
+

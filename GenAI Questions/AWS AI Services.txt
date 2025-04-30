@@ -1,0 +1,5 @@
+1.What is bedrock and amazon Q and the difference between them.
+2.When i should use sagemaker vs bedrock vs amazon Q.
+3.How bedrock works.
+4.What are different LLMs models available in bedrock.
+5.when to select which model in bedrock.
