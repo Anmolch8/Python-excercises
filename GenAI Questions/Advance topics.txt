@@ -1,0 +1,277 @@
+1.Threading vs multiprocessing
+Threading:
+What:
+Threading in Python is a technique that allows your program to run multiple operations concurrently 
+within the same process by using threads.
+A program always have 1 thread called main thread in python.
+Why:
+Want to perform I/O tasks in parallel.
+Responsive UI 
+Do background tasks
+How:
+Using 'threading' module in python
+def print_numbers():
+    for i in range(5):
+        print(f"Number {i}")
+        time.sleep(1)
+
+# Create a thread
+t = threading.Thread(target=print_numbers)
+
+# Start the thread
+t.start()
+
+# Main thread continues
+print("Main thread continues running...")
+t.join()  # Wait for the thread to finish
+print("Thread has finished.")
+when:
+when you not doing cpu-bound tasks,heavy computation
+Real-time UI responsiveness
+working with multiple files
+
+Multiprocessing:
+What:
+Multiprocessing in Python is a technique that allows you to run multiple processes simultaneously, 
+each with its own Python interpreter and memory space. Unlike threading,
+multiprocessing bypasses the Global Interpreter Lock (GIL), enabling true parallelism, 
+especially for CPU-bound tasks.
+Process- A completely separate instance of the Python interpreter. 
+Each process runs independently and has its own memory.
+Pool- A collection of worker processes that can be reused to parallelize tasks.
+Queue/Pipe- Used for inter-process communication (IPC) — i.e., sharing data between processes.
+
+Why:
+Due to the Global Interpreter Lock (GIL) in CPython, threads do not run Python bytecode in true parallel.
+So threading is not efficient for CPU-bound tasks — for that, use multiprocessing.
+
+How:
+Using 'multiprocessing' module in python
+from multiprocessing import Process
+import os
+
+def worker():
+    print(f"Process ID: {os.getpid()}")
+
+if __name__ == "__main__":
+    processes = []
+    for _ in range(4):
+        p = Process(target=worker)
+        p.start()
+        processes.append(p)
+
+    for p in processes:
+        p.join()
+
+when:
+To perform cpu intensive tasks (image processing)
+Want to fully utilize all the cpu cores or cpus
+
+
+Difference:
+| Feature              | `threading`                 | `multiprocessing`                 |
+|----------------------|-----------------------------|------------------------------------|
+| Parallelism          | No (GIL-limited)            | Yes (separate processes)          |
+| Memory usage         | Shared memory               | Separate memory per process       |
+| Overhead             | Lower                       | Higher (due to process creation)  |
+| Best for             | I/O-bound tasks             | CPU-bound tasks                   |
+
+2.What is Framework in python:
+what:
+A framework in Python is a pre-written, structured collection of modules, tools,
+and libraries that provides a foundation for building applications. 
+It defines a standard way to organize your code,
+handle common tasks, and enforce best practices, saving time and reducing errors.
+for eg dajango it gives you tool like webserver, database drivers, inbuild application architecture(MVT)
+FastApi:
+Pydantic moduling, jinja tempalting, ASGI server(uvicorn), online testing tool
+
+why:
+speeds up the development,Promotes clean, maintainable code,Often comes with security features built-in
+
+when:
+when you donot need to start the application from scratch
+| **Category**     | **Framework**     | **Use Case**                                |
+|------------------|-------------------|----------------------------------------------|
+| Web Development  | **Django**        | Full-stack, batteries-included web apps      |
+|                  | **Flask**         | Lightweight, flexible web apps               |
+|                  | **FastAPI**       | Modern, fast APIs with type hints            |
+| Data Science     | **TensorFlow**    | Deep learning and machine learning           |
+|                  | **PyTorch**       | Neural networks, research and production     |
+| GUI Apps         | **Tkinter**       | Desktop GUI applications                     |
+| Game Dev         | **Pygame**        | 2D game development                          |
+| Automation       | **Robot Framework**| Test automation                              |
+
+Framework vs library
+| **Aspect**         | **Library**                        | **Framework**                               |
+|--------------------|------------------------------------|----------------------------------------------|
+| Control Flow       | You call it                        | It calls your code (Inversion of control)    |
+| Flexibility        | More flexible                      | More structured and rigid                    |
+| Learning Curve     | Often simpler                      | Can be steeper                               |
+
+
+3. What are the frameworks available in python for GenAI
+| Framework / Library | Description |
+|----------------------|-------------|
+| **LangChain**        | Most popular orchestration framework for building GenAI apps using LLMs. Supports memory, tools, chains, agents, and RAG. |
+| **Haystack**         | Powerful framework for building **search, RAG, and Q&A** systems over documents using LLMs. |
+| **LlamaIndex** (formerly GPT Index) | Optimized for **indexing and querying large documents** with LLMs. Often used for RAG pipelines. |
+| **Transformers (Hugging Face)** | Library of pretrained LLMs (e.g., GPT, BERT, T5). Can generate text, translate, summarize, etc. |
+| **PromptTools**      | Useful for prompt testing, evaluation, and optimization. |
+| **Instructor**       | Small but powerful tool to enforce structured output from LLMs. |
+| **Guardrails AI**    | Adds validation, structure, and safety layers around LLM outputs. |
+| **FastAPI** + **LLMs** | While not GenAI-specific, FastAPI is often used to **deploy LLM-based APIs**. |
+
+| Tool / Framework | Description |
+|------------------|-------------|
+| **OpenAI Function Calling** | Structure LLM output with JSON schemas and function-like behavior. |
+| **Gradio**        | Build simple web UIs for LLM/image models quickly. |
+| **Streamlit**     | Build GenAI dashboards or apps with minimal code. |
+| **Weaviate / Pinecone / FAISS** | Vector databases for semantic search and RAG workflows. |
+
+1. LangChain
+What is it?
+LangChain is a framework for building LLM-powered applications using chains,
+agents, memory, and external tools like vector databases or APIs.
+
+Why use it?
+It simplifies the orchestration of multiple components (LLMs, search tools, documents, APIs) into structured, 
+multi-step workflows. It supports many LLMs and vector databases.
+
+When to use it?
+
+You want to build chatbots, retrieval-augmented generation (RAG), or agent-like tools.
+
+Your app needs memory, tool use, or complex multi-step reasoning.
+ 
+ 2. LlamaIndex (GPT Index)
+What is it?
+A framework for indexing large documents (PDFs, CSVs, Notion, etc.) and querying them effectively 
+using LLMs.
+
+Why use it?
+Provides structured document ingestion, vector indexing, and querying pipelines. Great for 
+turning unstructured data into chat-ready knowledge bases.
+
+When to use it?
+
+You're building search/chatbots over internal documents.
+
+You want modular RAG pipelines with advanced query control.
+
+ 3. Haystack
+What is it?
+An end-to-end framework for building search, Q&A, and RAG systems using LLMs and vector stores.
+
+Why use it?
+More production-focused and modular than LangChain. Comes with pipelines,
+API layers, and evaluation tools.
+
+When to use it?
+
+You're building a RAG-based knowledge assistant at scale.
+
+You need a robust, production-ready stack with monitoring and testing.
+
+4. Hugging Face Transformers
+What is it?
+The de facto library for accessing, fine-tuning, and using transformer-based models
+(e.g., GPT, BERT, T5).
+
+Why use it?
+Gives access to thousands of pretrained models with a consistent API.
+Also includes training utilities and model sharing.
+
+When to use it?
+
+You need to use or fine-tune foundation models on custom tasks.
+
+You want maximum flexibility and control over models and pipelines.
+
+5. Diffusers (by Hugging Face)
+What is it?
+A specialized library for generative image models like Stable Diffusion, 
+optimized for text-to-image tasks.
+
+Why use it?
+Comes with pretrained models, pipelines, and schedulers for image generation,
+inpainting, and upscaling.
+
+When to use it?
+
+You're building an app for AI-generated art or custom image generation.
+
+You want to experiment with or fine-tune diffusion models.
+
+6. Guardrails AI
+What is it?
+A framework to validate and constrain LLM outputs using Pydantic-like schemas and rules.
+
+Why use it?
+Ensures structured, safe, and predictable outputs from language models — especially important 
+for enterprise or regulated applications.
+
+When to use it?
+
+Your app must return structured output like JSON, SQL, or forms.
+
+You need safe and validated outputs to avoid hallucinations or invalid data.
+
+7. PEFT (Parameter-Efficient Fine-Tuning)
+What is it?
+A Hugging Face library for applying efficient fine-tuning techniques like LoRA,
+prefix tuning, and adapters.
+
+Why use it?
+Allows fine-tuning large models cheaply and with limited hardware.
+
+When to use it?
+
+You want to adapt an LLM to your domain without training from scratch.
+
+You're limited by compute and can't fine-tune full models.
+
+8. Gradio
+What is it?
+A Python library to quickly create interactive web UIs for machine learning models.
+
+Why use it?
+Simplifies testing and demoing models by creating drag-and-drop interfaces with minimal code.
+
+When to use it?
+
+You're building a prototype or demo for a GenAI app.
+
+You want quick UI integration for user input/output testing.
+
+ 9. FastAPI
+What is it?
+A modern, fast (async-capable) web framework for building APIs and backends.
+
+Why use it?
+Great for deploying LLMs as REST APIs, with automatic docs and high performance.
+
+When to use it?
+
+You want to serve your GenAI models as APIs.
+
+You're building a scalable backend for your AI app.
+
+10. RAGAS (Retrieval-Augmented Generation Assessment)
+What is it?
+A toolkit for evaluating RAG pipelines — specifically the accuracy, faithfulness, 
+and relevance of generated answers.
+
+Why use it?
+Solves a hard problem: measuring whether your RAG app is producing good, grounded responses.
+
+When to use it?
+
+You're testing or optimizing a document-based chatbot or Q&A system.
+
+You need metrics to tune your retrieval or summarization logic.
+
+
+
+
+
