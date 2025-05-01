@@ -271,6 +271,248 @@ You're testing or optimizing a document-based chatbot or Q&A system.
 
 You need metrics to tune your retrieval or summarization logic.
 
+4. Explore pandas
+what:
+pandas is a powerful Python library for data manipulation and analysis.
+it has two primary data structures:
+Series – A one-dimensional labeled array.
+DataFrame – A two-dimensional labeled table, like a spreadsheet or SQL table.
+
+series:
+import pandas as pd
+
+s = pd.Series([10, 20, 30], index=['a', 'b', 'c'])
+print(s)
+
+DataFrame:
+data = {
+    'Name': ['Alice', 'Bob'],
+    'Age': [25, 30]
+}
+df = pd.DataFrame(data)
+print(df)
+
+Inspecting Data 
+df.head()        # First 5 rows
+df.tail(2)       # Last 2 rows
+df.info()        # Structure info
+df.describe()    # Summary statistics
+
+Selecting data:
+df['Name']               # Single column
+df[['Name', 'Age']]      # Multiple columns
+
+df.loc[0]                # Row by label
+df.iloc[0]               # Row by position
+Select multiple rows and specific columns
+df.loc[['A', 'C'], ['Product', 'Stock']]
+df.iloc[[0, 2], [0, 2]]
+
+Select all rows for a column (label)
+df.loc[:, 'Price']
+df.iloc[:, 1]
+| Task                             | `.loc`                            | `.iloc`                      |
+|----------------------------------|-----------------------------------|------------------------------|
+| First row                        | `df.loc['A']`                     | `df.iloc[0]`                |
+| First column                     | `df.loc[:, 'Product']`            | `df.iloc[:, 0]`             |
+| Specific cells                   | `df.loc['A', 'Price']`            | `df.iloc[0, 1]`             |
+| Slice rows                      | `df.loc['A':'B']` (inclusive)     | `df.iloc[0:2]` (exclusive)  |
+
+
+
+filtering rows:
+df[df['Age'] > 28]        # Filter by condition
+
+
+Adding/Modifying Columns
+df['Age in 5 Years'] = df['Age'] + 5
+
+Removing Columns or Rows
+df.drop('City', axis=1, inplace=True)      # Drop column
+df.drop(1, axis=0, inplace=True)           # Drop row
+
+Renaming Columns
+df.rename(columns={'Age': 'Years'}, inplace=True)
+
+Sorting
+df.sort_values(by='Years', ascending=False)
+
+Combining Data
+pd.concat([df1, df2])
+Merging (SQL-style joins)
+pd.merge(df1, df2, on='key_column')
+
+Handling Missing Data
+df.isnull()                # Check missing values
+df.fillna(0)               # Fill missing values
+df.dropna()                # Drop rows with missing values
+
+ Reading/Writing Files
+ pd.read_csv('file.csv')             # Read CSV
+df.to_csv('output.csv', index=False)  # Write CSV
+
+pd.read_excel('file.xlsx')          # Read Excel
+df.to_excel('output.xlsx')          # Write Excel
+
+GroupBy Operations
+df.groupby('City')['Age'].mean()    # Average age per city
+
+Datetime Operations
+df['Date'] = pd.to_datetime(df['Date'])
+df['Year'] = df['Date'].dt.year
+
+why:
+1.Powerful Data Structure
+2.Simplifies Data analysis
+3.Read/Write many formats - csv, sql , json, parquet
+4.Great for Data Preprocessing
+5.Seamless Integration- numpy, scikit-Learning
+pandas is your go-to tool for transforming raw data into clean,
+useful insights — quickly, efficiently, and with minimal code.
+
+when:
+You should use pandas whenever you are working with structured data—like tables, spreadsheets,
+or CSV files—and need to clean, analyze, or manipulate that data efficiently.
+
+Cleaning and Preparing Data
+When your data has:
+
+Missing values
+
+Incorrect types
+
+Duplicates
+
+Needs formatting
+
+Exploratory Data Analysis (EDA)
+To quickly understand your dataset:
+
+Summary stats
+
+Column distributions
+
+Grouped aggregations
+
+Exploratory Data Analysis (EDA)
+To quickly understand your dataset:
+
+Summary stats
+
+Column distributions
+
+Grouped aggregations
+
+5. Learn about API's
+what:
+An API (Application Programming Interface) is a set of rules and 
+tools that allows one software or program to communicate with another.
+
+Connects software components
+
+Exposes data or functionality of an app, service, or platform
+
+Defines how requests and responses should be structured
+
+| Type         | Description                            | Example                       |
+|--------------|----------------------------------------|-------------------------------|
+| **Web API**  | Accessed over HTTP/HTTPS               | REST, GraphQL                 |
+| **Library API** | Interfaces between Python libraries | pandas API, NumPy API         |
+| **OS API**   | Access to system features              | Windows API, Android API      |
+| **Hardware API** | Interact with devices              | Camera API, GPS API           |
+
+why:
+1.Enable Communication Between Systems
+2.Access Services Without Rebuilding Them
+3.Automate Tasks and Workflows
+4.Fetch Real-Time Data
+5.Secure and Controlled Access
+
+| Purpose            | API Used                  |
+|--------------------|---------------------------|
+| Payments           | Stripe, PayPal API        |
+| Maps               | Google Maps API           |
+| Authentication     | OAuth / Google Login API  |
+| Social Media       | Twitter, Instagram APIs   |
+| Data Feeds         | News, Weather, Stock APIs |
+
+when:
+1.Access External Data or Services
+2.Integrate Two Applications
+3.Build Modular Applications (Frontend–Backend)
+5.Expose Your Service to Others
+
+REST API:
+REST (Representational State Transfer) is a style of web architecture that uses HTTP methods to
+perform CRUD operations (Create, Read, Update, Delete) on resources.
+
+| Method | Action  | Purpose                  |
+|--------|---------|--------------------------|
+| `GET`  | Read    | Retrieve data            |
+| `POST` | Create  | Add new data             |
+| `PUT`  | Update  | Update entire resource   |
+| `PATCH`| Update  | Update part of a resource|
+| `DELETE`| Delete | Remove data              |
+
+REST API Characterstics
+Uses stateless communication (each request is independent).
+
+Uses standard URLs to represent resources.
+
+Uses HTTP status codes (200 OK, 404 Not Found, 201 Created, etc.).
+
+Often returns data in JSON format.
+
+How:
+To build APIs in python we can use flask or FastAPI frameworks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
